@@ -1,0 +1,24 @@
+<?php
+
+use App\Http\Controllers\FrontendController;
+use Illuminate\Support\Facades\Route;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Route::get('/','FrontendController@homepage')->name('home');
+Route::get('about-us','FrontendController@about')->name('about');
+Route::get('contact-us','FrontendController@contact')->name('contact');
+Route::get('new-user','FrontendController@create')->name('create');
+Route::post('save','FrontendController@save')->name('save');
+Route::get('edit/{userId}','FrontendController@edit')->name('edit');
+Route::post('update','FrontendController@update')->name('update');
+Route::get('delete/{userId}','FrontendController@delete')->name('delete');

@@ -1,19 +1,14 @@
-@extends('master')
-@section('title','contact')
-@section('content')
-<h1>Contact</h1>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 @include('menu')
-
 <form action="{{route('jsave')}}" method="post">
     @csrf
   <div class="form-group">
     <label >Name</label>
-    <input type="text" name="name" class="form-control"  aria-describedby="emailHelp" placeholder="Enter name">
+    <input type="search" name="name" class="form-control"  aria-describedby="emailHelp" placeholder="Search here">
 
   </div>
   <button class="btn btn-primary" onclick="myFunction()">Submit</button>
-</form>
-<table class="table" id="tbl_data">
+<table class="table" id="table_data">
     <thead>
       <tr>
         <th scope="col">#</th>
@@ -24,9 +19,11 @@
     </thead>
  
   </table>
-<script>
+
+
+  <script>
     function myFunction(){
-    var t_data = document.getElementById("tbl_data");
+    var t_data = document.getElementById("table_data");
     var req=new XMLHttpRequest();
 
     req.open("GET","/jsave",true);
@@ -40,13 +37,14 @@
         //console.log(obj);
         
         for(i=0; i<obj.data.length;i++){
-            console.log(obj.datas[i]['name']);
-            console.log(obj.datas[i]['email']);
-            t_data.innerHTML += "<tr> <td>"+(i+1)+"</td> <td>"+obj.datas[i]['name']+"</td> <td>"+obj.datas[i]['email']+"</td> </tr>"
-                }
+            console.log(obj.data[i]['name']);
+            console.log(obj.data[i]['email']);
+            t_data.innerHTML += "<tr> <td>"+(i+1)+"</td> <td>"+obj.data[i]['name']+"</td> <td>"+obj.data[i]['email']+"</td> </tr>"
+        }
         
-            }
         }
     }
-</script>
-@endsection
+}
+
+  </script>
+

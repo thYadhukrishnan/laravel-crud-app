@@ -36,4 +36,7 @@
   </tbody>
 </table>
 <a href="{{route('create')}}" class="btn btn-primary">New</a>
+
+<a href="{{route('ajax')}}" class="btn btn-danger">Ajax</a>
+
 @endsection

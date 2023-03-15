@@ -55,4 +55,22 @@ class FrontendController extends Controller
         $user->delete();
         return redirect()->route('home')->with('message','Deleted...');
     }
+    public function ajax(){
+
+        return view('ajax');
+    }
+    public function show(){
+        //$data=User::where('name','=','name')->get();
+        $data=User::all();
+        return response()->json(['data'=>$data]);
+        //return view('show');
+    }
+    public function jsave(){
+        $name=request('name');
+        $data=User::where('name','=',$name)->get();
+        return response()->json(['data'=>$data]);
+    }
+    public function search(){
+        return view('search');
+    }
 }

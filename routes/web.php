@@ -22,3 +22,7 @@ Route::post('save','FrontendController@save')->name('save');
 Route::get('edit/{userId}','FrontendController@edit')->name('edit');
 Route::post('update','FrontendController@update')->name('update');
 Route::get('delete/{userId}','FrontendController@delete')->name('delete');
+Route::get('ajax',[FrontendController::class,'ajax'])->name('ajax');
+Route::get('show',[FrontendController::class,'show'])->name('show');
+Route::post('jsave',[FrontendController::class,'jsave'])->name('jsave');
+Route::get('search',[FrontendController::class,'search'])->name('search');

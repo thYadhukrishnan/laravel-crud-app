@@ -26,3 +26,4 @@ Route::get('ajax',[FrontendController::class,'ajax'])->name('ajax');
 Route::get('show',[FrontendController::class,'show'])->name('show');
 Route::post('jsave',[FrontendController::class,'jsave'])->name('jsave');
 Route::get('search',[FrontendController::class,'search'])->name('search');
+Route::get('view',[FrontendController::class,'view'])->name('view');

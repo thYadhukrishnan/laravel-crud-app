@@ -3,6 +3,9 @@
 @section('content')
 <h1>Form Page </h1>
 @include('menu')
+@php
+  $hobbies=explode(",",$user->hobbies);
+@endphp
 <div class="container">
 <form action="{{route('update')}}" method="post">
     @csrf
@@ -20,6 +23,15 @@
     <label >Date of Birth</label>
     <input type="text" name="date_of_birth" value="{{$user->date_of_birth_formated}}" class="form-control"  placeholder="Date of Birth">
   </div>
+  <div class="container">
+    <label>Hobbies</label>
+    Football<input type="checkbox" name="hobbies[]" id="" value="football" {{ in_array('football',$hobbies)? 'checked':''}}>
+    Cricket<input type="checkbox" name="hobbies[]" id="" value="cricket" {{ in_array('cricket',$hobbies)? 'checked':''}}>
+    Music<input type="checkbox" name="hobbies[]" id="" value="music" {{ in_array('music',$hobbies)? 'checked':''}}>
+    Movie<input type="checkbox" name="hobbies[]" id="" value="movie" {{ in_array('movie',$hobbies)? 'checked':''}}>
+    @error('hobbies')<p class="alert-danger">{{$message}}</p>@enderror
+  </div>
+
 
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>

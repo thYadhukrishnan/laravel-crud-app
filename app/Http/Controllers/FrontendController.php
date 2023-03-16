@@ -18,20 +18,34 @@ class FrontendController extends Controller
     public function about(){
         return view('about-us');
     }
-    public function contact(){
-        return view('contact-us');
+    public function contact(Request $request){
+        $query=User::query();
+        if($request->ajax()){
+            $users=$query->where(['user_id'=>$request->name])->get();
+            return response()->json(['users'=>$users]);
+        }
+        $users=$query->get();
+        return view('contact-us',compact('users'));
     }
     public function create(){
         return view('create');
     }
     public function save(){
+        request()->validate([
+            'name'=>'required',
+            'email'=>'required',
+            'date_of_birth'=>'required',
+            'hobbies'=>'required',
+        ]);
         $name=request('name');
         $email=request('email');
         $dob=request('date_of_birth');
+        $hobbies=implode(",",request('hobbies'));
         $user=User::updateOrCreate([
             'email' => $email],[
             'name' => $name,
             'date_of_birth' => $dob,
+            'hobbies'=>$hobbies,
         ]);
         return redirect()->route('home')->with('message','User Created Successfully...');
     }
@@ -47,6 +61,7 @@ class FrontendController extends Controller
             'name'=>request('name'),
             'email'=>request('email'),
             'dob'=>request('date_of_birth'),
+            'hobbies'=>implode(",",request('hobbies')),
         ]);
         return redirect()->route('home')->with('message','Updated...');
     }
@@ -70,7 +85,26 @@ class FrontendController extends Controller
         $data=User::where('name','=',$name)->get();
         return response()->json(['data'=>$data]);
     }
-    public function search(){
-        return view('search');
+    public function search(Request $request){
+        $query=User::query();
+        if($request->ajax()){
+            if(empty($request->name)){
+                $users=$query->get();
+
+            }
+            else{
+                $users=$query->where(['user_id'=>$request->name])->get();
+
+            }
+            
+            return response()->json(['users'=>$users]);
+        }
+        $users=$query->get();
+        return view('search',compact('users'));
+
+    }
+    
+    public function view(){
+        return view('view');
     }
 }

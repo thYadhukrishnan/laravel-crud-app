@@ -30,8 +30,8 @@
         //console.log(obj);
         
         for(i=0; i<obj.data.length;i++){
-            console.log(obj.data[i]['name']);
-            console.log(obj.data[i]['email']);
+            //console.log(obj.data[i]['name']);
+            //console.log(obj.data[i]['email']);
             t_data.innerHTML += "<tr> <td>"+(i+1)+"</td> <td>"+obj.data[i]['name']+"</td> <td>"+obj.data[i]['email']+"</td> </tr>"
         }
         

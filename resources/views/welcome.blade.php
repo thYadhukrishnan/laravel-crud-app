@@ -18,6 +18,8 @@
       <th scope="col">#</th>
       <th scope="col">Name</th>
       <th scope="col">Email</th>
+      <th scope="col">Hobbies</th>
+      <th scope="col">Date of Birth</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
@@ -27,6 +29,8 @@
       <th scope="row">{{$loop->iteration}}</th>
       <td>{{ $user->name }}</td>
       <td>{{ $user->email }}</td>
+      <td>{{$user->hobbies}}</td>
+      <td>{{ $user->date_of_birth_formated }}</td>
       <td>
         <a href="{{ route('edit',encrypt($user->user_id)) }}" class="btn btn-primary">Edit</a>
         <a href="{{ route('delete',encrypt($user->user_id)) }}" class="btn btn-danger">Delete</a>

@@ -6,10 +6,12 @@
 @php
   $hobbies=explode(",",$user->hobbies);
 @endphp
+{{$current_page}}
 <div class="container">
 <form action="{{route('update')}}" method="post">
     @csrf
     <input type="hidden" name="user_id" value="{{ encrypt($user->user_id) }}">
+    <input type="hidden" name="page" value="{{ $current_page}}">
   <div class="form-group">
     <label >Name</label>
     <input type="text" name="name" value="{{$user->name}}" class="form-control"  aria-describedby="emailHelp" placeholder="Enter name">

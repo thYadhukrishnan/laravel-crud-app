@@ -6,14 +6,15 @@ use Illuminate\Http\Request;
 
 class FrontendController extends Controller
 {
-    public function homepage(){
+    public function homepage(Request $request){
         $age=30;
         $status=1;
-        $users=User::all(); //select *from users;
+        $users=User::paginate(5); //select *from users;
         /*return $users;
         $users=User::find(1);
         return $users;*/
-        return view('welcome',compact('age','status','users'));
+        $current_page = $request->input('page', 1);
+        return view('welcome',compact('age','status','users','current_page'));
     }
     public function about(){
         return view('about-us');
@@ -27,8 +28,8 @@ class FrontendController extends Controller
         $users=$query->get();
         return view('contact-us',compact('users'));
     }
-    public function create(){
-        return view('create');
+    public function create($current_page){
+        return view('create',compact('current_page'));
     }
     public function save(){
         request()->validate([
@@ -37,6 +38,7 @@ class FrontendController extends Controller
             'date_of_birth'=>'required',
             'hobbies'=>'required',
         ]);
+        $page=request('page');
         $name=request('name');
         $email=request('email');
         $dob=request('date_of_birth');
@@ -47,15 +49,17 @@ class FrontendController extends Controller
             'date_of_birth' => $dob,
             'hobbies'=>$hobbies,
         ]);
-        return redirect()->route('home')->with('message','User Created Successfully...');
+        return redirect()->route('home', ['page'=>$page])->with('message','User Created Successfully...');
     }
-    public function edit($userId){
+    public function edit($userId,$current_page){
         $user=User::find(decrypt($userId));
-        return view('edit',compact('user'));
+        return view('edit',compact('user','current_page'));
     }
-    public function update(){
+    public function update(Request $request){
         $user=User::find(decrypt(request('user_id')));
-
+        
+        $currentPage=request('page');
+        //dd($page);
         $user->update([
 
             'name'=>request('name'),
@@ -63,12 +67,17 @@ class FrontendController extends Controller
             'dob'=>request('date_of_birth'),
             'hobbies'=>implode(",",request('hobbies')),
         ]);
-        return redirect()->route('home')->with('message','Updated...');
+        //return redirect()->route('home',['currentPage'=>])
+        //return redirect()->back()->withInput(['page'=>$page]);
+        //return redirect()->route('home')->with('message','Updated...');
+        //return redirect('home', ['page' => $request->page]);
+        //$currentPage = $request->input('page', 1);
+        return redirect()->route('home', ['page' => $currentPage]);
     }
     public function delete($userId){
         $user=User::find(decrypt($userId));
         $user->delete();
-        return redirect()->route('home')->with('message','Deleted...');
+        return redirect()->back()->with('message','User Deleted Successfully...');
     }
     public function ajax(){
 

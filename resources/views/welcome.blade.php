@@ -1,17 +1,14 @@
 @extends('master')
 @section('title','Home')
 @section('content')
+
     <h1>Welcome </h1>
     @if(session()->has('message'))
     <P>{{session()->get('message')}}</p>
     @endif
-    <ul>
-        <li><a href="">Home</a></li>
-        <li><a href="{{route('about')}}">About</a></li>
-        <li><a href="{{route('contact')}}">Contact-us</a></li>
-    </ul>
+@include('menu')
 <h3>Today is {{ date('d-M-Y')}}</h3>
-
+{{$current_page}}
 <table class="table">
   <thead>
     <tr>
@@ -26,21 +23,27 @@
   <tbody>
     @foreach($users as $user)
     <tr>
-      <th scope="row">{{$loop->iteration}}</th>
+      <th scope="row">{{$users->firstItem() + $loop->index}}</th>
       <td>{{ $user->name }}</td>
       <td>{{ $user->email }}</td>
       <td>{{$user->hobbies}}</td>
       <td>{{ $user->date_of_birth_formated }}</td>
       <td>
-        <a href="{{ route('edit',encrypt($user->user_id)) }}" class="btn btn-primary">Edit</a>
-        <a href="{{ route('delete',encrypt($user->user_id)) }}" class="btn btn-danger">Delete</a>
+        <a href="{{ route('edit',[encrypt($user->user_id),'page'=>$current_page])}}" class="btn btn-primary">Edit</a>
+        <a href="{{ route('delete',encrypt($user->user_id)) }}" class="btn btn-danger" onclick="return deletebtn();">Delete</a>
       </td>
     </tr>
     @endforeach
   </tbody>
 </table>
-<a href="{{route('create')}}" class="btn btn-primary">New</a>
+<div>{{$users->appends(request()->input())->links()}}</div>
+<a href="{{route('create',$current_page)}}" class="btn btn-primary">New</a>
 
 <a href="{{route('ajax')}}" class="btn btn-danger">Ajax</a>
-
+<script>
+  function deletebtn(){
+  if(!confirm("Are you sure to delete this"))
+  event.preventDefault();
+}
+</script>
 @endsection

@@ -11,7 +11,7 @@
 <body>
   @include('menu')
 <select name="name" id="name">
-  <option value="">Select Category</option>
+  <option value="">Select Name</option>
   @foreach ($users as $user)
   <option value="{{$user['user_id']}}">{{$user->name}}</option>
       

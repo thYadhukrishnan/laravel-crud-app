@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller
@@ -115,5 +116,29 @@ class FrontendController extends Controller
     
     public function view(){
         return view('view');
+    }
+    public function viewx(){
+
+        return view('viewx');
+    }
+    public function createx(){
+
+        return view('createx');
+    }
+
+    public function savex(Request $request){
+        //$customer=new Customer;
+        request()->validate([
+            'name'=>'required',
+            'email'=>'required',
+        ]);
+        $name=request('name');
+        $email=request('email');
+        $customer=Customer::Create([
+            'email' => $email,
+            'name' => $name,
+        ]);
+
+        return response()->json(['res'=>'Created']);
     }
 }

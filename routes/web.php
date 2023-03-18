@@ -27,3 +27,6 @@ Route::get('show',[FrontendController::class,'show'])->name('show');
 Route::post('jsave',[FrontendController::class,'jsave'])->name('jsave');
 Route::get('search',[FrontendController::class,'search'])->name('search');
 Route::get('view',[FrontendController::class,'view'])->name('view');
+Route::get('view-x',[FrontendController::class,'viewx'])->name('viewx');
+Route::get('createx',[FrontendController::class,'createx'])->name('createx');
+Route::post('savex',[FrontendController::class,'savex'])->name('savex');

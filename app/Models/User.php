@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -48,7 +49,10 @@ class User extends Authenticatable
     ];
 
     public function address(){
-        return $this->hasOne(UserAddress::class,'id','user_id');
+        return $this->hasOne(UserAddress::class,'user_id','user_id');//call the data from the user_addresses table while accesing the user table
+    }
+    public function orders(){
+        return $this->hasMany(Order::class,'user_id','user_id');
     }
     public function setDateOfBirthAttribute($value){
         $this->attributes['date_of_birth'] = date('Y-m-d',strtotime($value));

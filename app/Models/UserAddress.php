@@ -9,5 +9,11 @@ class UserAddress extends Model
 {
     protected $table='user_addresses';
     use HasFactory;
+    protected $fillable=[
+        'city','pincode'
+    ];
+    public function user(){
+        return $this->belongsTo(User::class,'user_id','user_id');//Call the data from user tbale wile accesing the user_address table
+    }
 
 }

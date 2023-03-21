@@ -6,4 +6,6 @@
     <li><a href="{{route('view')}}">view</a></li>
     <li><a href="{{route('viewx')}}">view</a></li>
     <li><a href="{{route('createx')}}">Create using Ajax</a></li>
+    <li><a href="{{route('note')}}">Summernote</a></li>
+    <li><a href="{{route('note_view')}}">Summernote view </a></li>
 </ul>

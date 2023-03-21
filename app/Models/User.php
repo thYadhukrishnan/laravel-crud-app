@@ -46,6 +46,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function address(){
+        return $this->hasOne(UserAddress::class,'id','user_id');
+    }
     public function setDateOfBirthAttribute($value){
         $this->attributes['date_of_birth'] = date('Y-m-d',strtotime($value));
     }

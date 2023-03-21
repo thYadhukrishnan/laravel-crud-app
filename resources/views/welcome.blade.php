@@ -31,6 +31,7 @@
       <td>
         <a href="{{ route('edit',[encrypt($user->user_id),'page'=>$current_page])}}" class="btn btn-primary">Edit</a>
         <a href="{{ route('delete',encrypt($user->user_id)) }}" class="btn btn-danger" onclick="return deletebtn();">Delete</a>
+        <a href="{{route('view_address',encrypt($user->user_id))}}"class="btn btn-warning">View</a>
       </td>
     </tr>
     @endforeach

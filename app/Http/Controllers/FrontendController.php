@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Customer;
+use App\Models\notes;
 use Illuminate\Http\Request;
+
+use function PHPUnit\Framework\returnSelf;
 
 class FrontendController extends Controller
 {
@@ -140,5 +143,42 @@ class FrontendController extends Controller
         ]);
 
         return response()->json(['res'=>'Created']);
+    }
+    public function note(){
+        return view('note');
+    }
+    public function save_note(){
+        $note=request('summernote');
+        $notes=notes::Create([
+            'notes'=>$note,
+        ]);
+        return redirect()->route('home');
+    }
+    public function note_view(){
+        $note=notes::all();
+        return view('note_view',compact('note'));
+    }
+    public function note_edit($id){
+        $note=notes::find(decrypt($id));
+        return view('note_edit',compact('note'));
+    }
+    public function update_note(){
+        $note=notes::find(decrypt(request('id')));
+        $note->update([
+            'notes'=>request('note'),
+        ]);
+
+        return redirect()->route('note_view');
+        
+
+    }
+    public function delete_note($id){
+        $note=notes::find(decrypt($id));
+        $note->delete();
+        return redirect()->back();
+    }
+    public function view_address($userId){
+        $user=User::find(decrypt($userId));
+        return view('view_address',compact('user'));
     }
 }

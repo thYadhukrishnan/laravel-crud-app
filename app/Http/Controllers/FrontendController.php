@@ -181,4 +181,23 @@ class FrontendController extends Controller
         $user=User::find(decrypt($userId));
         return view('view_address',compact('user'));
     }
+    public function subcategory(Request $request){
+        $query=User::query();
+
+        if($request->ajax()){
+            if(empty($request->name)){
+                $users=$query->get();
+
+            }
+            else{
+                $users=$query->where(['user_id'=>$request->name])->get();
+
+            }
+            
+            return response()->json(['users'=>$users]);
+        }
+
+        $users=$query->get();
+        return view('subcategory',compact('users'));
+    }
 }

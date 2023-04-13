@@ -8,4 +8,5 @@
     <li><a href="{{route('createx')}}">Create using Ajax</a></li>
     <li><a href="{{route('note')}}">Summernote</a></li>
     <li><a href="{{route('note_view')}}">Summernote view </a></li>
+    <li><a href="{{route('subcategory')}}">Sub Category </a></li>
 </ul>

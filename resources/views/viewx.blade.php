@@ -26,6 +26,8 @@
                             <td>`+data.data[i]['email']+`</td>
                             <td>`+data.data[i]['hobbies']+`</td>
                             <td>`+data.data[i]['date_of_birth']+`</td>
+                            <td><a href="editx/`+(data.data[i]['user_id'])+`" class="btn btn-primary">Edit</a>
+                            <a href="" class="btn btn-danger">Delete</a></td>
                             </tr>`);
                     }
                 }

@@ -37,3 +37,4 @@ Route::get('note_edit/{id}',[FrontendController::class,'note_edit'])->name('note
 Route::post('update_note',[FrontendController::class,'update_note'])->name('update_note');
 Route::get('delete_note/{id}',[FrontendController::class,'delete_note'])->name('delete_note');
 Route::get('view_address/{userId}',[FrontendController::class,'view_address'])->name('view_address');
+Route::get('subcategory',[FrontendController::class,'subcategory'])->name('subcategory');

@@ -35,7 +35,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
-        'user_id',         // Commented for AJAX code to work ,it will show the user id on url " Not Good "
+        'user_id',
+       // 'email',         // Commented for AJAX code to work ,it will show the user id on url " Not Good "
     ];
     
 

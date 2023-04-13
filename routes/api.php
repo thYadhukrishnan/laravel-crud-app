@@ -19,3 +19,5 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::post('get-user','ApiController@get_user');
+
+Route::post('user-login','ApiController@user_login');

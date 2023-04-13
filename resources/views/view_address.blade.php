@@ -3,7 +3,7 @@
     <li>Email : {{$user->email}}</li>
     <li>City : {{$user->address->city ??'No data found'}}</li>
     <li>PIN Code : {{$user->address->pincode ?? 'No data Found'}}</li>
-    <li></li>
+
 </ul>
 <hr>
 <table>

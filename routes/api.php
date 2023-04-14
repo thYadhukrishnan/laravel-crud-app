@@ -18,6 +18,12 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::post('get-user','ApiController@get_user');
+Route::middleware('auth:sanctum')->group(function(){
+
+    Route::post('get-user','ApiController@get_user');
+    Route::post('user-logout','ApiController@user_logout');
+
+});
 
 Route::post('user-login','ApiController@user_login');
+
